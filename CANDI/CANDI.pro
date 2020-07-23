@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network serialbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,21 +24,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+INCLUDEPATH += \
+        widgets \
+
 SOURCES += \
         candi_version.cpp \
         debug.cpp \
         directory.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        widgets/about_widget.cpp
 
 HEADERS += \
         candi_version.h \
         debug.hpp \
         directory.hpp \
-        mainwindow.h
+        mainwindow.h \
+        widgets/about_widget.hpp
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        ui/about.ui
+
+UI_DIR = ui_generated/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

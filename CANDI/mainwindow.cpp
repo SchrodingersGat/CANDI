@@ -4,6 +4,8 @@
 #include "debug.hpp"
 #include "candi_version.h"
 
+#include "widgets/about_widget.hpp"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -53,6 +55,7 @@ void MainWindow::onClose()
 void MainWindow::initSignalsSlots()
 {
     connect(ui->actionE_xit, SIGNAL(triggered()), this, SLOT(onClose()));
+    connect(ui->action_About, SIGNAL(triggered()), this, SLOT(showAboutInformation()));
 }
 
 
@@ -76,6 +79,16 @@ void MainWindow::updateWindowTitle()
     QString title = "CANDI v" + getCandiVersion();
 
     setWindowTitle(title);
+}
+
+
+void MainWindow::showAboutInformation()
+{
+    AboutWidget *about = new AboutWidget(this);
+
+    about->setWindowModality(Qt::ApplicationModal);
+
+    about->exec();
 }
 
 

@@ -32,6 +32,8 @@ protected slots:
     void updateDisplay();
     void updateWindowTitle();
 
+    void showAboutInformation();
+
 private:
     Ui::MainWindow *ui;
 };
