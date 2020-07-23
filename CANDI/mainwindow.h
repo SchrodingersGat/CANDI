@@ -20,6 +20,14 @@ public slots:
     void initMenus();
     void initSignalsSlots();
 
+    // Actions
+    void onClose();
+
+    // Workspace
+    void loadWorkspace(QString filename = QString());
+    void saveWorkspace(QString filename = QString());
+
+protected slots:
     // Display / update functions
     void updateDisplay();
     void updateWindowTitle();

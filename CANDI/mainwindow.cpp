@@ -19,7 +19,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    // TODO: Disconnect the CAN interface
+
+    // TODO: Save the workspace settings
+
+    // TODO: Save global settings
+
     delete ui;
+}
+
+
+void MainWindow::onClose()
+{
+    close();
 }
 
 
@@ -28,7 +40,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::initSignalsSlots()
 {
-
+    connect(ui->actionE_xit, SIGNAL(triggered()), this, SLOT(onClose()));
 }
 
 
@@ -52,4 +64,16 @@ void MainWindow::updateWindowTitle()
     QString title = "CANDI v" + getCandiVersion();
 
     setWindowTitle(title);
+}
+
+
+void MainWindow::loadWorkspace(QString filename)
+{
+
+}
+
+
+void MainWindow::saveWorkspace(QString filename)
+{
+
 }
