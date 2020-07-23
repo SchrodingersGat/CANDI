@@ -16,6 +16,11 @@ public:
     ~MainWindow();
 
 public slots:
+    // Initialization functions
+    void initMenus();
+    void initSignalsSlots();
+
+    // Display / update functions
     void updateDisplay();
     void updateWindowTitle();
 

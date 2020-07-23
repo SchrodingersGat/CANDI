@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    initMenus();
+
+    initSignalsSlots();
+
     updateDisplay();
 }
 
@@ -16,6 +20,24 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+/**
+ * @brief MainWindow::initSignalsSlots - Connect various signals and slots
+ */
+void MainWindow::initSignalsSlots()
+{
+
+}
+
+
+/**
+ * @brief MainWindow::initMenus - Initialize menu items and actions
+ */
+void MainWindow::initMenus()
+{
+
 }
 
 
