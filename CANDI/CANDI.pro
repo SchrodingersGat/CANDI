@@ -27,12 +27,14 @@ CONFIG += c++11
 SOURCES += \
         candi_version.cpp \
         debug.cpp \
+        directory.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
         candi_version.h \
         debug.hpp \
+        directory.hpp \
         mainwindow.h
 
 FORMS += \
