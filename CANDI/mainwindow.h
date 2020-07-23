@@ -23,10 +23,9 @@ public slots:
 
     // Actions
     void onClose();
+    void onLoadWorkspace();
+    void onSaveWorkspace();
 
-    // Workspace
-    void loadWorkspace(QString filename = QString());
-    void saveWorkspace(QString filename = QString());
 
 protected slots:
     // Display / update functions
@@ -34,6 +33,9 @@ protected slots:
     void updateWindowTitle();
 
     void showAboutInformation();
+
+    void loadWorkspace(QString filename = QString());
+    void saveWorkspace(QString filename = QString());
 
     void loadGlobalSettings();
     void saveGlobalSettings();

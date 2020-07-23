@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+
 #include "ui_mainwindow.h"
 
 #include "directory.hpp"
@@ -6,6 +7,7 @@
 #include "candi_version.h"
 
 #include <qcanbus.h>
+#include <qfiledialog.h>
 
 #include "widgets/about_widget.hpp"
 
@@ -118,13 +120,46 @@ void MainWindow::saveGlobalSettings()
 }
 
 
+void MainWindow::onLoadWorkspace()
+{
+    loadWorkspace();
+}
+
+
 void MainWindow::loadWorkspace(QString filename)
 {
+    // No file provided? Ask the user
+    if (filename.isEmpty())
+    {
+        filename = QFileDialog::getOpenFileName(this,
+                                                tr("Load workspace file"),
+                                                CANDI::workspaceDir(),
+                                                "(*.candi_wks)");
 
+        // Still no filename? Exit
+        if (filename.isEmpty()) return;
+    }
+}
+
+
+void MainWindow::onSaveWorkspace()
+{
+    saveWorkspace();
 }
 
 
 void MainWindow::saveWorkspace(QString filename)
 {
+    // No file provided? Ask the user
+    if (filename.isEmpty())
+    {
+        filename = QFileDialog::getSaveFileName(this,
+                                                tr("Save workspace file"),
+                                                CANDI::workspaceDir(),
+                                                "(*.candi_wks)");
+
+        // Still no filename? Exit
+        if (filename.isEmpty()) return;
+    }
 
 }

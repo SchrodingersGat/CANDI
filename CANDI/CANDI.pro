@@ -26,20 +26,21 @@ CONFIG += c++11
 
 INCLUDEPATH += \
         widgets \
+        src \
 
 SOURCES += \
-        candi_version.cpp \
-        debug.cpp \
-        directory.cpp \
         main.cpp \
         mainwindow.cpp \
+        src\candi_version.cpp \
+        src\debug.cpp \
+        src\directory.cpp \
         widgets/about_widget.cpp
 
 HEADERS += \
-        candi_version.h \
-        debug.hpp \
-        directory.hpp \
         mainwindow.h \
+        src\candi_version.h \
+        src\debug.hpp \
+        src\directory.hpp \
         widgets/about_widget.hpp
 
 FORMS += \
