@@ -17,6 +17,7 @@ public:
 
 public slots:
     // Initialization functions
+    void initCANInterface();
     void initMenus();
     void initSignalsSlots();
 
@@ -33,6 +34,9 @@ protected slots:
     void updateWindowTitle();
 
     void showAboutInformation();
+
+    void loadGlobalSettings();
+    void saveGlobalSettings();
 
 private:
     Ui::MainWindow *ui;

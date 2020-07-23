@@ -1,8 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "directory.hpp"
 #include "debug.hpp"
 #include "candi_version.h"
+
+#include <qcanbus.h>
 
 #include "widgets/about_widget.hpp"
 
@@ -15,11 +18,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    initMenus();
+    setDockNestingEnabled(true);
 
+    initMenus();
     initSignalsSlots();
+    initCANInterface();
 
     updateDisplay();
+
+    loadGlobalSettings();
+    loadWorkspace(CANDI::defaultWorkspaceFile());
 
     DEBUG << "MainWindow() complete";
 }
@@ -59,6 +67,12 @@ void MainWindow::initSignalsSlots()
 }
 
 
+void MainWindow::initCANInterface()
+{
+    // TODO
+}
+
+
 /**
  * @brief MainWindow::initMenus - Initialize menu items and actions
  */
@@ -89,6 +103,18 @@ void MainWindow::showAboutInformation()
     about->setWindowModality(Qt::ApplicationModal);
 
     about->exec();
+}
+
+
+void MainWindow::loadGlobalSettings()
+{
+    // TODO
+}
+
+
+void MainWindow::saveGlobalSettings()
+{
+    // TODO
 }
 
 

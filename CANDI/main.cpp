@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <qdir.h>
 #include <qcommandlineparser.h>
 
 #include "mainwindow.h"
@@ -37,6 +38,13 @@ int main(int argc, char *argv[])
     {
         setDebugLevel(debugValue);
     }
+
+    // Load plugins from a local plugin dir
+    QString pluginsDir = a.applicationDirPath() + QDir::separator() + "plugins" + QDir::separator();
+
+    QCoreApplication::addLibraryPath(pluginsDir);
+
+    DEBUG << "Starting CANDI in" << a.applicationDirPath();
 
     MainWindow w;
     w.show();
