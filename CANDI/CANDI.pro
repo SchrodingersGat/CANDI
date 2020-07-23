@@ -25,11 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        candi_version.cpp \
+        debug.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
         candi_version.h \
+        debug.hpp \
         mainwindow.h
 
 FORMS += \

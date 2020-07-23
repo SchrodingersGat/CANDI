@@ -1,12 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "debug.hpp"
 #include "candi_version.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    DEBUG << "MainWindow() started";
+
     ui->setupUi(this);
 
     initMenus();
@@ -14,11 +18,15 @@ MainWindow::MainWindow(QWidget *parent) :
     initSignalsSlots();
 
     updateDisplay();
+
+    DEBUG << "MainWindow() complete";
 }
 
 
 MainWindow::~MainWindow()
 {
+    DEBUG << "~MainWindow() started";
+
     // TODO: Disconnect the CAN interface
 
     // TODO: Save the workspace settings
@@ -26,11 +34,15 @@ MainWindow::~MainWindow()
     // TODO: Save global settings
 
     delete ui;
+
+    DEBUG << "~MainWindow() complete";
 }
 
 
 void MainWindow::onClose()
 {
+    DEBUG << "MainWindow::onClose()";
+
     close();
 }
 
