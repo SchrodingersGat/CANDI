@@ -1,2 +1,5 @@
 # Qt related files
 *.user
+build-*
+debug/*
+release/*

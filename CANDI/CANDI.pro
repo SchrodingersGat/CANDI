@@ -29,6 +29,7 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
+        candi_version.h \
         mainwindow.h
 
 FORMS += \
