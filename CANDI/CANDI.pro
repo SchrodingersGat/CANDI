@@ -27,10 +27,12 @@ CONFIG += c++11
 INCLUDEPATH += \
         widgets \
         src \
+        src\can \
 
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+        src/can/candi_interface.cpp \
         src\candi_version.cpp \
         src\debug.cpp \
         src\directory.cpp \
@@ -38,6 +40,7 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
+        src/can/candi_interface.hpp \
         src\candi_version.h \
         src\debug.hpp \
         src\directory.hpp \
