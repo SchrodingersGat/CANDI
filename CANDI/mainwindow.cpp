@@ -43,11 +43,11 @@ MainWindow::~MainWindow()
 {
     DEBUG << "~MainWindow() started";
 
-    // TODO: Disconnect the CAN interface
+    CANDI_Interface::instance()->disconnect();
 
-    // TODO: Save the workspace settings
+    saveWorkspace(CANDI::defaultWorkspaceFile());
 
-    // TODO: Save global settings
+    saveGlobalSettings();
 
     delete ui;
 
@@ -99,7 +99,18 @@ void MainWindow::updateDisplay()
 
 void MainWindow::updateWindowTitle()
 {
-    QString title = "CANDI v" + getCandiVersion();
+    QString title;
+
+    auto interface = CANDI_Interface::instance();
+
+    if (interface->isConnected())
+    {
+        title = tr("CAN connected");
+    }
+    else
+    {
+        title = tr("Disconnected");
+    }
 
     setWindowTitle(title);
 }
@@ -140,13 +151,17 @@ void MainWindow::showAboutInformation()
 
 void MainWindow::loadGlobalSettings()
 {
-    // TODO
+    QSettings settings(CANDI::globalSettingsFile(), QSettings::IniFormat);
+
+    CANDI_Interface::instance()->loadSettings(settings);
 }
 
 
 void MainWindow::saveGlobalSettings()
 {
-    // TODO
+    QSettings settings(CANDI::globalSettingsFile(), QSettings::IniFormat);
+
+    CANDI_Interface::instance()->saveSettings(settings);
 }
 
 
@@ -169,6 +184,34 @@ void MainWindow::loadWorkspace(QString filename)
         // Still no filename? Exit
         if (filename.isEmpty()) return;
     }
+
+    QFile f(filename);
+
+    // Ignore if the file does not exist..
+    if (!f.exists()) return;
+
+    QSettings workspace(filename, QSettings::IniFormat);
+
+    workspace.beginGroup("workspace");
+
+    // Workspace geometry
+    if (workspace.contains("geometry"))
+    {
+        QVariant geom = workspace.value("geometry");
+        restoreGeometry(geom.toByteArray());
+    }
+
+    if (workspace.contains("state"))
+    {
+        QVariant st = workspace.value("state");
+        restoreState(st.toByteArray());
+    }
+
+    workspace.endGroup();  // "workspace"
+
+    workspace.beginGroup("windows");
+
+    workspace.endGroup();  // "windows"
 }
 
 
@@ -192,4 +235,21 @@ void MainWindow::saveWorkspace(QString filename)
         if (filename.isEmpty()) return;
     }
 
+    QSettings workspace(filename, QSettings::IniFormat);
+
+    workspace.clear();
+
+    // Save application information
+    workspace.beginGroup("application");
+    workspace.setValue("version", getCandiVersion());
+    workspace.endGroup();  // "application"
+
+    workspace.beginGroup("workspace");
+    workspace.setValue("geometry", saveGeometry());
+    workspace.setValue("state", saveState());
+    workspace.endGroup();  // "workspace"
+
+    workspace.beginGroup("windows");
+    // TODO - Save settings for each sub-window
+    workspace.endGroup();  // "windows"
 }
