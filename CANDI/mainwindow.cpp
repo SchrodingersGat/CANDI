@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     DEBUG << "MainWindow() started";
 
+    // Ensure any user directories are available
+    CANDI::createSettingsDirectories();
+
     ui->setupUi(this);
 
     setDockNestingEnabled(true);
@@ -66,6 +69,9 @@ void MainWindow::initSignalsSlots()
 {
     connect(ui->actionE_xit, SIGNAL(triggered()), this, SLOT(onClose()));
     connect(ui->action_About, SIGNAL(triggered()), this, SLOT(showAboutInformation()));
+
+    connect(ui->action_Load_Workspace, SIGNAL(triggered()), this, SLOT(onLoadWorkspace()));
+    connect(ui->action_Save_Workspace, SIGNAL(triggered()), this, SLOT(onSaveWorkspace()));
 }
 
 

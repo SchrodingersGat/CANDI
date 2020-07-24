@@ -17,6 +17,9 @@ QString workspaceDir();
 // Paths to various hard-coded settings files
 QString defaultWorkspaceFile();
 QString globalSettingsFile();
+
+bool createSettingsDirectories();
+
 }
 
 #endif // DIRECTORY_HPP
