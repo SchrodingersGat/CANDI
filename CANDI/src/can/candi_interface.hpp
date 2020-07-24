@@ -15,8 +15,20 @@ class CANDI_Interface : public QThread
 {
     Q_OBJECT
 
+private:
+    CANDI_Interface();
+
 public:
-    CANDI_Interface(QObject *parent = nullptr);
+    CANDI_Interface(CANDI_Interface const&) = delete;
+    CANDI_Interface& operator=(CANDI_Interface const&) = delete;
+
+    // Singleton design pattern to only allow a single instance of the interface class
+    static std::shared_ptr<CANDI_Interface> instance()
+    {
+        static std::shared_ptr<CANDI_Interface> s{new CANDI_Interface};
+        return s;
+    }
+
     virtual ~CANDI_Interface();
 
     static QStringList GetAvailablePlugins();
@@ -27,6 +39,12 @@ public:
 
 public slots:
 
+    // Connection controls
+    bool isConnected(void);
+    bool connect(QString pluginName = QString(), QString deviceName = QString(), QString *errMsg = nullptr);
+    void disconnect(void);
+
+    // Logging controls
     bool isLogging(void);
     void startLogging(void);
     void stopLogging(void);

@@ -26,6 +26,9 @@ public slots:
     void onLoadWorkspace();
     void onSaveWorkspace();
 
+    void onCanConnect();
+    void onCanDisconnect();
+
 
 protected slots:
     // Display / update functions

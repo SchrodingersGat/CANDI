@@ -5,6 +5,7 @@
 #include "directory.hpp"
 #include "debug.hpp"
 #include "candi_version.h"
+#include "candi_interface.hpp"
 
 #include <qcanbus.h>
 #include <qfiledialog.h>
@@ -101,6 +102,29 @@ void MainWindow::updateWindowTitle()
     QString title = "CANDI v" + getCandiVersion();
 
     setWindowTitle(title);
+}
+
+
+void MainWindow::onCanConnect()
+{
+    auto interface = CANDI_Interface::instance();
+
+    // Ignore if already connected
+    if (interface->isConnected()) return;
+
+    // TODO - What to do with result of connection?
+    bool result = interface->connect();
+}
+
+
+void MainWindow::onCanDisconnect()
+{
+    auto interface = CANDI_Interface::instance();
+
+    // Ignore if already disconnected
+    if (!interface->isConnected()) return;
+
+    interface->disconnect();
 }
 
 

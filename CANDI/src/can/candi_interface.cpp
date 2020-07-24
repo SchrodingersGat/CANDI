@@ -5,7 +5,7 @@
 #include "debug.hpp"
 
 
-CANDI_Interface::CANDI_Interface(QObject *parent) : QThread(parent)
+CANDI_Interface::CANDI_Interface() : QThread()
 {
     DEBUG << "CANDI_Inferface() created";
 }
@@ -73,6 +73,32 @@ void CANDI_Interface::loadSettings(QSettings &settings)
     mostRecentDevice = settings.value("device", QString()).toString();
 
     settings.endGroup();
+}
+
+
+bool CANDI_Interface::isConnected()
+{
+    // TODO
+    return false;
+}
+
+/**
+ * @brief CANDI_Interface::connect - Attempt to connect to a CAN device
+ * @param pluginName - Name of the CAN plugin to use (optional)
+ * @param deviceName - Name of the CAN device to use (optional)
+ * @param errMsg - Pointer to store any error messages
+ * @return - True if the connection succeeded
+ */
+bool CANDI_Interface::connect(QString pluginName, QString deviceName, QString *errMsg)
+{
+    // TODO
+    return false;
+}
+
+
+void CANDI_Interface::disconnect()
+{
+    // TODO
 }
 
 
