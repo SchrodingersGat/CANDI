@@ -22,6 +22,15 @@ public:
     static QStringList GetAvailablePlugins();
     static QStringList GetAvailableDevices(const QString pluginName, QString *errorMsg = nullptr);
 
+    void loadSettings(QSettings &settings);
+    void saveSettings(QSettings &settings);
+
+public slots:
+
+    bool isLogging(void);
+    void startLogging(void);
+    void stopLogging(void);
+
 protected:
     // Mutexes
     QMutex canMutex;
@@ -33,6 +42,12 @@ protected:
 
     // Pending data to be written to log file
     QList<QStringList> pendingLogData;
+
+    // Name of the most recently used CAN plugin
+    QString mostRecentPlugin;
+
+    // Name of the most recently used CAN device
+    QString mostRecentDevice;
 };
 
 #endif // CANDI_INTERFACE_HPP

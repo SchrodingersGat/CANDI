@@ -52,3 +52,45 @@ QStringList CANDI_Interface::GetAvailableDevices(const QString pluginName, QStri
 
     return devices;
 }
+
+
+void CANDI_Interface::saveSettings(QSettings &settings)
+{
+    settings.beginGroup("can");
+
+    settings.setValue("plugin", mostRecentPlugin);
+    settings.setValue("device", mostRecentDevice);
+
+    settings.endGroup();
+}
+
+
+void CANDI_Interface::loadSettings(QSettings &settings)
+{
+    settings.beginGroup("can");
+
+    mostRecentPlugin = settings.value("plugin", QString()).toString();
+    mostRecentDevice = settings.value("device", QString()).toString();
+
+    settings.endGroup();
+}
+
+
+bool CANDI_Interface::isLogging()
+{
+    // TODO
+
+    return false;
+}
+
+
+void CANDI_Interface::startLogging()
+{
+    // TODO
+}
+
+
+void CANDI_Interface::stopLogging()
+{
+    // TODO
+}
