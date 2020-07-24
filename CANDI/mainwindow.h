@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qlist.h>
+
+#include "base_widget.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +22,7 @@ public slots:
     // Initialization functions
     void initCANInterface();
     void initMenus();
+    void initWidgets();
     void initSignalsSlots();
 
     // Actions
@@ -28,6 +32,8 @@ public slots:
 
     void onCanConnect();
     void onCanDisconnect();
+    void onCanConfigure();
+    void onCanShowStats();
 
 
 protected slots:
@@ -43,8 +49,12 @@ protected slots:
     void loadGlobalSettings();
     void saveGlobalSettings();
 
-private:
+protected:
     Ui::MainWindow *ui;
+    QList<DockManager*> dockedWidgets;
+
+    bool addDockedWidget(DockManager* manager, QAction* action);
+    bool addDockedWidget(QWidget* widget, QAction* action);
 };
 
 #endif // MAINWINDOW_H

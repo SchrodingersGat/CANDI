@@ -11,6 +11,7 @@
 #include <qfiledialog.h>
 
 #include "widgets/about_widget.hpp"
+#include "widgets/monitor_widget.hpp"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setDockNestingEnabled(true);
 
     initMenus();
+    initWidgets();
     initSignalsSlots();
     initCANInterface();
 
@@ -73,6 +75,11 @@ void MainWindow::initSignalsSlots()
 
     connect(ui->action_Load_Workspace, SIGNAL(triggered()), this, SLOT(onLoadWorkspace()));
     connect(ui->action_Save_Workspace, SIGNAL(triggered()), this, SLOT(onSaveWorkspace()));
+
+    connect(ui->actionQuick_Connect, SIGNAL(triggered()), this, SLOT(onCanConnect()));
+    connect(ui->action_Disconnect, SIGNAL(triggered()), this, SLOT(onCanDisconnect()));
+    connect(ui->action_Select_Device, SIGNAL(triggered()), this, SLOT(onCanConfigure()));
+    connect(ui->action_Statistics, SIGNAL(triggered()), this, SLOT(onCanShowStats()));
 }
 
 
@@ -87,7 +94,66 @@ void MainWindow::initCANInterface()
  */
 void MainWindow::initMenus()
 {
+    // TODO
+}
 
+
+void MainWindow::initWidgets()
+{
+    addDockedWidget(new CANMonitorWidget(this), ui->action_Traffic_Monitor);
+}
+
+
+bool MainWindow::addDockedWidget(DockManager *manager, QAction *action)
+{
+    if (!manager)
+    {
+        WARNING << "nullptr (DockManager*) supplied to addDockedWidget";
+
+        return false;
+    }
+
+    QString name = manager->objectName();
+
+    // As widgets use name-based lookup, ensure there are no duplicates
+    for (auto dock : dockedWidgets)
+    {
+        if (!dock) continue;
+
+        if (dock->objectName() == name)
+        {
+            WARNING << "Docked widget already exists with name" << name;
+            return false;
+        }
+    }
+
+    if (action)
+    {
+        action->setCheckable(true);
+
+        manager->setToggleAction(action);
+    }
+
+    dockedWidgets.append(manager);
+    addDockWidget(Qt::LeftDockWidgetArea, manager);
+
+    manager->updateActionState();
+
+    return true;
+}
+
+bool MainWindow::addDockedWidget(QWidget *widget, QAction *action)
+{
+    if (!widget)
+    {
+        WARNING << "nullptr (QWidget*) supplied to addDockedWidget";
+
+        return false;
+    }
+
+    auto* manager = new DockManager(widget->windowTitle(), widget, this);
+
+    return addDockedWidget(manager, action);
 }
 
 
@@ -136,6 +202,18 @@ void MainWindow::onCanDisconnect()
     if (!interface->isConnected()) return;
 
     interface->disconnect();
+}
+
+
+void MainWindow::onCanConfigure()
+{
+    // TODO - Select a CAN interface
+}
+
+
+void MainWindow::onCanShowStats()
+{
+    // TDOO - Show CAN statistics window
 }
 
 

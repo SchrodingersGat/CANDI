@@ -41,14 +41,22 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionE_xit"/>
     <addaction name="action_Load_Workspace"/>
     <addaction name="action_Save_Workspace"/>
+    <addaction name="separator"/>
+    <addaction name="actionE_xit"/>
    </widget>
    <widget class="QMenu" name="menu_CAN">
     <property name="title">
      <string>&amp;CAN</string>
     </property>
+    <addaction name="action_Select_Device"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuick_Connect"/>
+    <addaction name="action_Disconnect"/>
+    <addaction name="separator"/>
+    <addaction name="action_Traffic_Monitor"/>
+    <addaction name="action_Statistics"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -94,6 +102,31 @@
   <action name="action_CAN_Plugins">
    <property name="text">
     <string>&amp;CAN Plugins</string>
+   </property>
+  </action>
+  <action name="action_Select_Device">
+   <property name="text">
+    <string>Confi&amp;gure</string>
+   </property>
+  </action>
+  <action name="actionQuick_Connect">
+   <property name="text">
+    <string>&amp;Connect</string>
+   </property>
+  </action>
+  <action name="action_Disconnect">
+   <property name="text">
+    <string>&amp;Disconnect</string>
+   </property>
+  </action>
+  <action name="action_Statistics">
+   <property name="text">
+    <string>&amp;Statistics</string>
+   </property>
+  </action>
+  <action name="action_Traffic_Monitor">
+   <property name="text">
+    <string>&amp;Traffic Monitor</string>
    </property>
   </action>
  </widget>

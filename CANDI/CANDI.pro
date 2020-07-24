@@ -36,7 +36,9 @@ SOURCES += \
         src\candi_version.cpp \
         src\debug.cpp \
         src\directory.cpp \
-        widgets/about_widget.cpp
+        widgets/about_widget.cpp \
+        widgets/base_widget.cpp \
+        widgets/monitor_widget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,11 +46,15 @@ HEADERS += \
         src\candi_version.h \
         src\debug.hpp \
         src\directory.hpp \
-        widgets/about_widget.hpp
+        widgets/about_widget.hpp \
+        widgets/base_widget.hpp \
+        widgets/monitor_widget.hpp
 
 FORMS += \
         mainwindow.ui \
-        ui/about.ui
+        ui/about.ui \
+        ui/can_connect.ui \
+        ui/can_viewer.ui
 
 UI_DIR = ui_generated/
 
