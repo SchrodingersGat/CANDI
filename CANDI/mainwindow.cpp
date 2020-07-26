@@ -190,7 +190,7 @@ void MainWindow::onCanConnect()
     if (interface->isConnected()) return;
 
     // TODO - What to do with result of connection?
-    bool result = interface->connect();
+    bool result = interface->openConnection();
 }
 
 
@@ -201,7 +201,7 @@ void MainWindow::onCanDisconnect()
     // Ignore if already disconnected
     if (!interface->isConnected()) return;
 
-    interface->disconnect();
+    interface->closeConnection();
 }
 
 

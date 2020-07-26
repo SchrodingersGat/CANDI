@@ -37,19 +37,34 @@ public:
     void loadSettings(QSettings &settings);
     void saveSettings(QSettings &settings);
 
+    uint64_t getRxCount() const { return rxCount; }
+    uint64_t getTxCount() const { return txCount; }
+
+    void resetCounters();
+
 public slots:
+
+    virtual void run() override;
+    void stop();
 
     // Connection controls
     bool isConnected(void);
-    bool connect(QString pluginName = QString(), QString deviceName = QString(), QString *errMsg = nullptr);
-    void disconnect(void);
+    bool openConnection(QString pluginName = QString(), QString deviceName = QString(), QString *errMsg = nullptr);
+    void closeConnection(void);
+
+    bool writeFrame(QCanBusFrame &frame);
 
     // Logging controls
     bool isLogging(void);
     void startLogging(void);
     void stopLogging(void);
 
+    void onFramesReceived(void);
+
 protected:
+    // CAN adapter
+    QCanBusDevice *adapter = nullptr;
+
     // Mutexes
     QMutex canMutex;
     QMutex logMutex;
@@ -66,6 +81,10 @@ protected:
 
     // Name of the most recently used CAN device
     QString mostRecentDevice;
+
+    bool running = false;
+
+    void configureInterface(void);
 };
 
 #endif // CANDI_INTERFACE_HPP
